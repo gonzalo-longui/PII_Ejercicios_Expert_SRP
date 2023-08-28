@@ -5,46 +5,25 @@ namespace Library
 {
     public class AppointmentService
     {
-        public static string CreateAppointment(string name, string id, string phoneNumber, DateTime date, string appoinmentPlace, string doctorName)
+        /*
+            ClassName: AppointmentService
+            Responsabilidades:
+                - Crear los appointments
+                - Mostrar al usuario si la creación del appointment fue exitosa
+            Colaboradores:
+                - Patient
+                - Doctor
+        */
+        public static string CreateAppointment(Patient patient, DateTime date, string appoinmentPlace, Doctor doctor)
         {
+            /*
+            Cada paciente podría ser su propio objeto con name, id, phoneNumber y otras cosas como edad, etc.
+            Cada doctor podría ser su propio objeto con doctorName, especialidad y otras cosas
+            appointmentPlace podría tener opciones
+            */
             StringBuilder stringBuilder = new StringBuilder("Scheduling appointment...\n");
-            Boolean isValid = true;
 
-            if (string.IsNullOrEmpty(name))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'name' is required\n");
-                isValid = false;
-            }
-
-            if (string.IsNullOrEmpty(id))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'id' is required\n");
-                isValid = false;
-            }
-
-            if (string.IsNullOrEmpty(phoneNumber))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'phone number' is required\n");
-                isValid = false;
-            }
-
-            if (string.IsNullOrEmpty(appoinmentPlace))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'appoinment place' is required\n");
-                isValid = false;
-            }
-
-
-            if (string.IsNullOrEmpty(doctorName))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'doctor name' is required\n");
-                isValid = false;
-            }
-
-            if (isValid)
-            {
-                stringBuilder.Append("Appoinment scheduled");
-            }
+            stringBuilder.Append($"Appoinment scheduled for patient {patient.Name}");
 
             return stringBuilder.ToString();
         }
