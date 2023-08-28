@@ -5,8 +5,11 @@ namespace SRP
 {
     public class LibraryManager
     {
+
+        //Lista estática master con todos los sectors
         public static List<Sector> sectors = new List<Sector>();
         
+        //método para encontrar un libro. busca en cada sector, shelf y book
         public static void FindBookLocation(Book book)
         {
             foreach (Sector sector in sectors)
