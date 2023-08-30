@@ -7,8 +7,23 @@ namespace SRP
     {
 
         //Lista estática master con todos los sectors
-        public static List<Sector> sectors = new List<Sector>();
+        /*
+            ClassName: LibraryManager
+            Responsabilidades: 
+             - conocer todos los sectores
+             - agregar sector a lista de sectores
+             - saber dónde estan todos los libros dentro de los sectores / shelves
+            Colaboradores: 
+             - Sector
+             - Shelf
+             - Book
+        */
+        private static List<Sector> sectors = new List<Sector>();
         
+        public static void AddToListOfSectors(Sector sector)
+        {
+            sectors.Add(sector);
+        }
         //método para encontrar un libro. busca en cada sector, shelf y book
         public static void FindBookLocation(Book book)
         {

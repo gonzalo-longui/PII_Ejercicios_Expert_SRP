@@ -13,7 +13,7 @@ namespace SRP
         {
             this.Name = name;
             this.Shelves = new List<Shelf>();
-            LibraryManager.sectors.Add(this);
+            LibraryManager.AddToListOfSectors(this);
         }
 
         public void PutShelfInSector(Shelf shelf)
