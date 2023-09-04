@@ -29,7 +29,7 @@ namespace Library
             this.AppointmentPlace = appointmentPlace;
             this.Doctor = doctor;
         }
-        public static Appointment CreateAppointment(string patientId, DateTime date, string appointmentPlace, string doctorId)
+        public static Appointment CreateAppointment(string patientName, string patientId, string patientPhoneNumber, string patientAge, DateTime date, string appointmentPlace, string doctorName, string doctorId, string doctorPhoneNumber, string doctorSpecialty)
         {
             /*
             Cada paciente podría ser su propio objeto con name, id, phoneNumber y otras cosas como edad, etc.
@@ -37,7 +37,7 @@ namespace Library
             appointmentPlace podría tener opciones
             */
             StringBuilder stringBuilder = new StringBuilder("Scheduling appointment...\n");
-            if (Patient.GetPatientFromId(patientId) == null || Doctor.GetDoctorFromId(doctorId) == null || String.IsNullOrEmpty(Patient.GetPatientFromId(patientId).Name) || String.IsNullOrEmpty(Doctor.GetDoctorFromId(doctorId).Name) || String.IsNullOrEmpty(Patient.GetPatientFromId(patientId).PhoneNumber) || String.IsNullOrEmpty(Patient.GetPatientFromId(patientId).Age) || String.IsNullOrEmpty(Doctor.GetDoctorFromId(patientId).PhoneNumber) || String.IsNullOrEmpty(Doctor.GetDoctorFromId(patientId).Specialty))
+            if (String.IsNullOrEmpty(patientName) || String.IsNullOrEmpty(patientId) || String.IsNullOrEmpty(patientPhoneNumber) || String.IsNullOrEmpty(patientAge) || String.IsNullOrEmpty(appointmentPlace) || String.IsNullOrEmpty(doctorName) || String.IsNullOrEmpty(doctorId) || String.IsNullOrEmpty(doctorPhoneNumber) || String.IsNullOrEmpty(doctorSpecialty))
             {
                 stringBuilder.Append($"Error: Some information is missing. Please complete all fields to proceed");
                 Console.WriteLine(stringBuilder.ToString());
@@ -45,9 +45,12 @@ namespace Library
             }
             else
             {
+                Patient newPatient = new Patient(patientName, patientId, patientPhoneNumber, patientAge);
+                Doctor newDoctor = new Doctor(doctorName, doctorId, doctorPhoneNumber, doctorSpecialty);
+                Appointment newAppointment = new Appointment(newPatient, date, appointmentPlace, newDoctor);
                 stringBuilder.Append($"Appoinment scheduled for patient {Patient.GetPatientFromId(patientId).Name}");
                 Console.WriteLine(stringBuilder.ToString());
-                Appointment newAppointment = new Appointment(Patient.GetPatientFromId(patientId), date, appointmentPlace, Doctor.GetDoctorFromId(doctorId));
+                
                 return newAppointment;
             }
             
