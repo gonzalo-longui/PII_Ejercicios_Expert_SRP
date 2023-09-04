@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Library
@@ -24,35 +25,28 @@ namespace Library
         public string Id { get; }
         public string PhoneNumber { get; }
         public string Specialty { get; }
+        private static List<Doctor> doctors = new List<Doctor>(); 
 
         public Doctor(string name, string id, string phoneNumber, string specialty)
         {
             this.Name = name;
-            while (string.IsNullOrEmpty(this.Name))
-            {
-                Console.WriteLine("Invalid Name: Name can't be empty");
-                this.Name = Console.ReadLine();
-            }
             this.Id = id;
-            while (string.IsNullOrEmpty(this.Id))
-            {
-                Console.WriteLine($"Invalid ID: ID can't be empty. Please provide and ID for Doctor {this.Name}");
-                this.Id = Console.ReadLine();
-            }
             this.PhoneNumber = phoneNumber;
-            while (string.IsNullOrEmpty(this.PhoneNumber))
-            {
-                Console.WriteLine($"Invalid Phone Number: Phone number can't be empty. Please provide a phone number for Doctor {this.Name}");
-                this.PhoneNumber = Console.ReadLine();
-            }
             this.Specialty = specialty;
-            while (string.IsNullOrEmpty(this.Specialty))
-            {
-                Console.WriteLine($"Invalid Specialty: Specialty can't be empty. Please provide a specialty for Doctor {this.Name}");
-                this.Specialty = Console.ReadLine();
-            }
+            doctors.Add(this);
         }
-        
+
+        public static Doctor GetDoctorFromId(string id)
+        {
+            foreach (Doctor doctor in doctors)
+            {
+                if (doctor.Id == id)
+                {
+                    return doctor;
+                }
+            }
+            return null;
+        }
         
     }
 }
